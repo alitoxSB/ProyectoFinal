@@ -1,0 +1,8 @@
+repeat 
+	begin
+		result := x * result;
+		put(' ');
+		putint(result);
+		n := n + 1;
+	end
+until (n = 3);

@@ -1,0 +1,6 @@
+let 
+	var m: Integer;
+	var e: Integer;
+	var l: Integer
+in
+m := e # l;

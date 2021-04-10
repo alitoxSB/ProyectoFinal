@@ -1,0 +1,4 @@
+for i from 0 to 5 do
+    begin
+        value := i +1
+    end

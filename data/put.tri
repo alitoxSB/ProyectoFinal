@@ -1,0 +1,2 @@
+put t
+bigger (t = 3 : z = 8);
