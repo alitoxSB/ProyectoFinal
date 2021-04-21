@@ -5,16 +5,23 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 public class RunCommand extends Command {
 
     public IntegerLiteral I;
-    public Command C;
+    private Command C;
 
     public RunCommand (Command cAST, IntegerLiteral iAST, SourcePosition sourcePosition) {
         super(sourcePosition);
         I = iAST;
-        C = cAST;
+        setC(cAST);
     }
 
     public Object visit(Visitor v, Object o) {
         return v.visitRunCommand(this, o);
     }
 
+    public Command getC() {
+        return C;
+    }
+
+    public void setC(Command c) {
+        C = c;
+    }
 }

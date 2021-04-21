@@ -63,7 +63,7 @@ public class LayoutVisitor implements Visitor {
   }
 
   public Object visitRunCommand(RunCommand ast, Object obj) {
-    return layoutBinary("RunCom.", ast.C, ast.I);
+    return layoutBinary("RunCom.", ast.getC(), ast.I);
   }
 
   public Object visitChooseCommand(ChooseCommand ast, Object obj) {
@@ -281,19 +281,19 @@ public class LayoutVisitor implements Visitor {
 
   // Literals, Identifiers and Operators
   public Object visitCharacterLiteral(CharacterLiteral ast, Object obj) {
-    return layoutNullary(ast.spelling);
+    return layoutNullary(ast.getSpelling());
   }
 
   public Object visitIdentifier(Identifier ast, Object obj) {
-    return layoutNullary(ast.spelling);
+    return layoutNullary(ast.getSpelling());
  }
 
   public Object visitIntegerLiteral(IntegerLiteral ast, Object obj) {
-    return layoutNullary(ast.spelling);
+    return layoutNullary(ast.getSpelling());
   }
 
   public Object visitOperator(Operator ast, Object obj) {
-    return layoutNullary(ast.spelling);
+    return layoutNullary(ast.getSpelling());
   }
 
 

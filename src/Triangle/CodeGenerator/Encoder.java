@@ -98,10 +98,14 @@ public final class Encoder implements Visitor {
   }
 
   public Object visitRunCommand(RunCommand ast, Object obj) {
-    return null;
-  }
+    Frame frame = (Frame) obj;
+    int times_for_run = Integer.parseInt(ast.I.getSpelling());
+    while (times_for_run>0){
+      ast.getC().visit(this, frame);
+      times_for_run--;
+    }return null;}
 
-  public Object visitChooseCommand(ChooseCommand ast, Object obj) {
+    public Object visitChooseCommand(ChooseCommand ast, Object obj) {
     return null;
   }
 
@@ -138,7 +142,7 @@ public final class Encoder implements Visitor {
 						Object o) {
     Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.type.visit(this, null);
-    emit(Machine.LOADLop, 0, 0, ast.CL.spelling.charAt(1));
+    emit(Machine.LOADLop, 0, 0, ast.CL.getSpelling().charAt(1));
     return valSize;
   }
 
@@ -167,7 +171,7 @@ public final class Encoder implements Visitor {
   public Object visitIntegerExpression(IntegerExpression ast, Object o) {
     Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.type.visit(this, null);
-    emit(Machine.LOADLop, 0, 0, Integer.parseInt(ast.IL.spelling));
+    emit(Machine.LOADLop, 0, 0, Integer.parseInt(ast.IL.getSpelling()));
     return valSize;
   }
 
@@ -216,11 +220,11 @@ public final class Encoder implements Visitor {
     if (ast.E instanceof CharacterExpression) {
         CharacterLiteral CL = ((CharacterExpression) ast.E).CL;
         ast.entity = new KnownValue(Machine.characterSize,
-                                 characterValuation(CL.spelling));
+                                 characterValuation(CL.getSpelling()));
     } else if (ast.E instanceof IntegerExpression) {
         IntegerLiteral IL = ((IntegerExpression) ast.E).IL;
         ast.entity = new KnownValue(Machine.integerSize,
-				 Integer.parseInt(IL.spelling));
+				 Integer.parseInt(IL.getSpelling()));
     } else {
       int valSize = ((Integer) ast.E.visit(this, frame)).intValue();
       ast.entity = new UnknownValue(valSize, frame.level, frame.size);
@@ -474,7 +478,7 @@ public final class Encoder implements Visitor {
     int typeSize;
     if (ast.entity == null) {
       int elemSize = ((Integer) ast.T.visit(this, null)).intValue();
-      typeSize = Integer.parseInt(ast.IL.spelling) * elemSize;
+      typeSize = Integer.parseInt(ast.IL.getSpelling()) * elemSize;
       ast.entity = new TypeRepresentation(typeSize);
       writeTableDetails(ast);
     } else
@@ -643,7 +647,7 @@ public final class Encoder implements Visitor {
     elemSize = ((Integer) ast.type.visit(this, null)).intValue();
     if (ast.E instanceof IntegerExpression) {
       IntegerLiteral IL = ((IntegerExpression) ast.E).IL;
-      ast.offset = ast.offset + Integer.parseInt(IL.spelling) * elemSize;
+      ast.offset = ast.offset + Integer.parseInt(IL.getSpelling()) * elemSize;
     } else {
       // v-name is indexed by a proper expression, not a literal
       if (ast.indexed)

@@ -620,7 +620,7 @@ public class Interpreter {
     if (args.length == 1)
       objectName = args[0];
   	else
-      objectName = "c:\\data\\obj.tam";
+      objectName = "c:\\data\\number.tam";
 
     loadObjectProgram(objectName);
     if (CT != CB) {

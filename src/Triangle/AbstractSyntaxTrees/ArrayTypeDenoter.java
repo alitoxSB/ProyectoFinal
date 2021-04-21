@@ -33,7 +33,7 @@ public class ArrayTypeDenoter extends TypeDenoter {
     if (obj != null && obj instanceof ErrorTypeDenoter)
       return true;
     else if (obj != null && obj instanceof ArrayTypeDenoter)
-      return this.IL.spelling.compareTo(((ArrayTypeDenoter) obj).IL.spelling) == 0 &&
+      return this.IL.getSpelling().compareTo(((ArrayTypeDenoter) obj).IL.getSpelling()) == 0 &&
              this.T.equals(((ArrayTypeDenoter) obj).T);
     else
       return false;

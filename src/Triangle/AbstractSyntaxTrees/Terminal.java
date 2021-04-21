@@ -20,8 +20,16 @@ abstract public class Terminal extends AST {
 
   public Terminal (String theSpelling, SourcePosition thePosition) {
     super (thePosition);
-    spelling = theSpelling;
+    setSpelling(theSpelling);
   }
 
-  public String spelling;
+  private String spelling;
+
+    public String getSpelling() {
+        return spelling;
+    }
+
+    public void setSpelling(String spelling) {
+        this.spelling = spelling;
+    }
 }
